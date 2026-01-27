@@ -1,23 +1,329 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+
+
+  <style>
+    /* 기본 스타일 재정의 */
+    body { font-family: 'Noto Sans KR', sans-serif; line-height: 1.8; margin: 0; padding: 0; background: #f4f6f8; color: #444; }
+    header { background: #ffffff; padding: 40px 15px; text-align: center; border-bottom: 5px solid #e0e0e0; border-radius: 0 0 12px 12px; }
+    header h1 { color: #2a628f; font-size: 2.5em; margin-bottom: 10px; font-weight: 700; }
+    header p { color: #666; font-size: 1.1em; max-width: 700px; margin: 0 auto; line-height: 1.6; }
+
+    /* 섹션 레이아웃 */
+    section { max-width: 900px; margin: 30px auto; padding: 30px; background: #fff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+    h2 { color: #2a628f; font-size: 1.8em; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px; margin-top: 0; }
+    h3 { color: #4a4a4a; font-size: 1.4em; margin-top: 25px; border-left: 5px solid #a5c2d6; padding-left: 10px; }
+    p { margin-bottom: 1.5em; font-size: 1.05em; line-height: 1.7; color: #555; }
+
+    /* 목록 스타일 */
+    ul { list-style: none; padding-left: 0; }
+    ul li { position: relative; padding-left: 25px; margin-bottom: 10px; line-height: 1.6; }
+    ul li::before { content: '✓'; color: #2a628f; font-weight: bold; position: absolute; left: 0; }
+    ol li { margin-bottom: 12px; font-size: 1.05em; }
+
+    /* 테이블 스타일 */
+    table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.95em; }
+    th, td { border: 1px solid #ddd; padding: 12px; text-align: left; vertical-align: middle; }
+    th { background: #eef3f7; color: #333; font-weight: bold; text-align: center; }
+
+    /* CTA 버튼 스타일 */
+    .btn-cta {
+      display: inline-block;
+      padding: 14px 30px;
+      background: #4a8cbf;
+      color: #fff;
+      font-weight: 700;
+      border-radius: 30px;
+      box-shadow: 0 4px 10px rgba(0, 74, 128, 0.2);
+      transition: background-color 0.3s ease, transform 0.2s;
+      text-align: center;
+      margin-top: 20px;
+      cursor: pointer;
+      border: none;
+      text-decoration: none;
+    }
+    .btn-cta:hover {
+      background: #3a72a0;
+      transform: translateY(-2px);
+      text-decoration: none;
+    }
+
+    /* 반응형 디자인 */
+    @media (max-width: 600px) {
+      body { padding: 10px; }
+      header { padding: 30px 10px; }
+      header h1 { font-size: 2em; }
+      section { margin: 15px auto; padding: 20px; }
+      h2 { font-size: 1.5em; }
+      h3 { font-size: 1.2em; }
+      .btn-cta { width: 100%; padding: 15px 0; font-size: 0.9em; }
+    }
+
+    /* 네비게이션 스타일 */
+    nav { max-width: 900px; margin: 0 auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+    nav ul { display: flex; flex-wrap: wrap; justify-content: space-around; padding: 10px 15px; list-style: none; margin: 0; }
+    nav li a { color: #2a628f; font-size: 0.95em; font-weight: 500; padding: 8px 12px; border-radius: 5px; transition: background-color 0.2s; }
+    nav li a:hover { background: #eef3f7; text-decoration: none; }
+
+    /* 이미지 및 앵커 */
+    .anchor { display: block; position: relative; top: -100px; visibility: hidden; }
+    .image-container { text-align: center; margin: 20px 0; }
+    .image-container img { max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+
+    /* 폼 스타일 */
+    form { background: #f9f9f9; padding: 25px; border-radius: 8px; }
+    input[type="text"], input[type="tel"], select, textarea {
+      width: calc(100% - 24px); padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; font-size: 1em;
+    }
+    input[type="checkbox"] { margin-right: 8px; }
+  </style>
+
+  <!-- Schema.org Article 마크업(JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://도메인/투룸인테리어"
+    },
+    "headline": "2026년 투룸 인테리어 완벽 가이드: 비용 절감부터 트렌드 분석까지",
+    "image": [
+      "https://도메인/투룸_인테리어_메인.jpg"
+    ],
+    "author": {
+      "@type": "Organization",
+      "name": "인테리어 전문가 그룹"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "전문 인테리어 정보 플랫폼",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://도메인/로고.png"
+      }
+    },
+    "datePublished": "2026-01-01",
+    "dateModified": "2026-01-28",
+    "description": "2026년 최신 투룸 인테리어 트렌드와 함께 서울, 경기, 부산, 대구 등 전국 지역별 평균 비용과 견적 비교 정보를 제공합니다. 좁은 공간을 넓고 효율적으로 활용하는 팁, 전문가 추천 가구 배치, 그리고 내돈내산 후기 기반의 믿을 수 있는 업체를 찾는 방법까지 상세히 안내합니다. 저렴한 비용으로 만족스러운 인테리어를 완성할 수 있는 가이드를 지금 바로 확인하세요.",
+    "keywords": "투룸 인테리어, 투룸 인테리어 비용, 투룸 인테리어 견적, 서울 투룸 인테리어, 경기 투룸 인테리어, 부산 투룸 인테리어, 2026 인테리어 트렌드, 좁은집 인테리어, 셀프 인테리어 장단점",
+    "commentCount": 15,
+    "mainEntity": {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "투룸 인테리어 평균 비용은 얼마인가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "투룸 인테리어의 평균 비용은 평수, 시공 범위, 자재 선택, 지역에 따라 크게 달라집니다. 일반적으로 10평대 후반~20평대 초반의 투룸 인테리어는 부분 시공(도배, 장판)의 경우 200만 원~400만 원, 전체 리모델링(철거, 주방, 욕실 포함)의 경우 1,000만 원~2,000만 원까지 예상할 수 있습니다. 자세한 내용은 전문가 견적 상담을 통해 확인하는 것이 가장 정확합니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "좁은 투룸 공간을 넓게 보이는 인테리어 팁이 있나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "좁은 투룸 공간을 넓게 보이게 하려면 '확장성'을 고려해야 합니다. 밝은 색상 계열(화이트, 베이지)의 벽지와 가구를 사용하고, 거울이나 광택이 있는 마감재를 활용하면 시각적인 공간 확장 효과를 볼 수 있습니다. 또한, 다용도 가구(소파베드, 폴딩 테이블)를 활용하고 수직 공간을 활용한 수납장으로 불필요한 짐을 정리하는 것이 중요합니다."
+          }
+        }
+      ]
+    }
+  }
+  </script>
+</head>
+
+<body>
+
+  <header>
+    <h1>2026 투룸 인테리어 완벽 가이드</h1>
+    <p>좁은 공간도 넓고 효율적으로! 전문가가 제안하는 2026년 최신 트렌드와 투룸 인테리어 비용 절감 노하우를 공개합니다.</p>
+    <a href="#quote-form" class="btn-cta">무료 견적 상담 받기</a>
+  </header>
+
+  <nav aria-label="페이지 내 이동">
+    <ul>
+      <li><a href="#trend-2026">2026 트렌드</a></li>
+      <li><a href="#cost-guide">비용 분석 (평균 견적)</a></li>
+      <li><a href="#space-solution">공간 활용 노하우</a></li>
+      <li><a href="#region-guide">지역별 비교</a></li>
+      <li><a href="#review-guide">추천 업체 및 후기</a></li>
+      <li><a href="#checklist">필수 체크리스트</a></li>
+    </ul>
+  </nav>
+
+  <section id="trend-2026">
+    <span id="trend-2026-anchor" class="anchor"></span>
+    <h2>2026년 투룸 인테리어 트렌드 분석: 좁은 집의 새로운 표준</h2>
+    <p>최근 1인 가구 및 신혼부부에게 투룸은 가장 실용적인 주거 형태입니다. 하지만 제한된 공간을 어떻게 활용하느냐에 따라 주거 만족도가 크게 달라지죠. 2026년에는 '모듈형 가구', '멀티 스페이스', '미니멀리즘'이 핵심 키워드로 떠오르고 있습니다. 공간 효율성을 극대화하는 동시에 개인의 개성을 반영하는 디자인이 선호되는 추세입니다.</p>
+    <p>특히, 거주자의 라이프스타일에 따라 공간을 유연하게 변화시킬 수 있는 <strong>모듈형 인테리어</strong>가 주목받고 있습니다. 거실과 침실의 경계를 허물고, 파티션이나 커튼을 활용하여 필요에 따라 공간을 분리하는 방식입니다. 이는 좁은 투룸 공간을 넓어 보이게 하는 동시에, 하나의 공간에서 다양한 활동을 가능하게 합니다. 2026년 트렌드는 단순히 예쁜 디자인을 넘어 실용성과 편의성을 강조합니다.</p>
+    <p>투룸 인테리어는 주택 리모델링과 달리 <strong>부분 시공</strong>이 주를 이룹니다. 도배, 장판, 조명 교체만으로도 집안 분위기를 완전히 바꿀 수 있기 때문입니다. 특히, 낡은 아파트나 빌라의 경우 화장실이나 주방 싱크대 교체만으로도 만족도가 매우 높습니다.</p>
+
+    <h3>트렌드 1: 확장성을 위한 미니멀리즘</h3>
+    <p>불필요한 요소를 제거하고 핵심 가구만 배치하는 미니멀리즘은 투룸 인테리어의 기본입니다. 좁은 공간에 짐이 많아지면 답답함을 유발하기 때문에, 넉넉한 수납공간을 확보하고 가구는 낮은 높이의 제품을 선택하여 시각적인 개방감을 주는 것이 중요합니다. 화이트, 베이지, 라이트 그레이와 같은 밝은 색상의 조합은 공간을 더욱 넓어 보이게 하는 시각적 장점이 있습니다.</p>
+
+    <h3>트렌드 2: 다용도 가구와 멀티 스페이스의 결합</h3>
+    <p>하나의 가구가 여러 기능을 수행하는 다용도 가구(멀티펑션 가구)는 투룸 인테리어의 필수품입니다. 소파 겸 침대, 접이식 식탁, 이동식 아일랜드 식탁 등이 대표적입니다. 거실을 작업 공간으로 활용하는 1인 가구의 경우, 평소에는 거실로 사용하다가 필요에 따라 책상과 의자를 꺼내 사용할 수 있도록 설계하는 것이 2026년의 주요 트렌드입니다.</p>
+  </section>
+
+  <section id="cost-guide">
+    <span id="cost-guide-anchor" class="anchor"></span>
+    <h2>투룸 인테리어 비용 분석: 평균 견적과 저렴한 곳 찾는 노하우</h2>
+    <p>투룸 인테리어 견적은 '평수(면적)', '시공 범위', '자재 등급'에 따라 천차만별입니다. 특히 <strong>투룸 인테리어 비용</strong>은 단순히 평당 가격으로 계산하기 어렵습니다. 20평대 초반의 투룸을 기준으로 부분 시공(도배, 장판, 조명)부터 전체 리모델링(주방, 욕실, 철거 포함)까지 다양한 견적을 예상할 수 있습니다. <strong>평균적인 금액</strong>을 산출할 때는 반드시 지역별 물가와 인건비 차이를 고려해야 합니다.</p>
+
+    <h3>투룸 인테리어 예상 비용표 (2026년 기준)</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>시공 범위</th>
+          <th>시공 항목</th>
+          <th>예상 비용 (평균)</th>
+          <th>주요 특징 및 장점</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>부분 인테리어 (가장 저렴한 곳)</td>
+          <td>도배, 장판 교체, LED 조명 설치</td>
+          <td>200만 원 ~ 400만 원</td>
+          <td>가성비가 뛰어나며, 전세나 월세 거주자에게 추천. 1~2일 내 시공 완료.</td>
+        </tr>
+        <tr>
+          <td>기본 인테리어 (내돈내산 추천)</td>
+          <td>부분 시공 + 문/몰딩 필름 시공, 싱크대 상판 교체</td>
+          <td>400만 원 ~ 700만 원</td>
+          <td>집의 분위기를 완전히 바꾸고 싶을 때 적합. 주거 만족도가 높음.</td>
+        </tr>
+        <tr>
+          <td>전체 인테리어 (리모델링)</td>
+          <td>주방, 욕실 전체 교체, 베란다 확장, 샤시 교체</td>
+          <td>1,000만 원 ~ 2,000만 원</td>
+          <td>노후된 빌라나 아파트에 적합. 장기 거주를 위한 확실한 투자.</td>
+        </tr>
+        <tr>
+          <td>DIY 인테리어 (최저가)</td>
+          <td>셀프 페인팅, 가구 배치, 소품 활용</td>
+          <td>100만 원 미만</td>
+          <td>노동력이 많이 소요되지만 <strong>가장 저렴한 비용</strong>으로 진행 가능.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>DIY vs. 전문가 시공: 장단점 비교</h3>
+    <p><strong>DIY (셀프 인테리어)의 장점과 단점:</strong> <strong>장점</strong>은 <strong>저렴한 비용</strong>으로 개성을 살릴 수 있다는 점입니다. <strong>단점</strong>은 시공 품질이 떨어질 수 있고, 시간과 노동력이 많이 소요된다는 점입니다. 반면 전문가에게 맡기면 깔끔한 마감과 확실한 A/S를 보장받을 수 있지만, <strong>비용</strong>이 상대적으로 높습니다.</p>
+    <p><strong>전문가 시공의 장점:</strong> 전문가는 <strong>좁은집 인테리어</strong>에 대한 노하우를 가지고 있어 공간 활용을 극대화할 수 있습니다. <strong>단점</strong>은 <strong>견적</strong>을 잘못 받으면 불필요한 비용이 발생할 수 있으므로, 여러 업체에 <strong>비교 견적</strong>을 받아보는 것이 중요합니다.</p>
+  </section>
+
+  <section id="space-solution">
+    <span id="space-solution-anchor" class="anchor"></span>
+    <h2>좁은 투룸 공간 활용 노하우: 전문가가 추천하는 팁</h2>
+    <p>투룸은 방 2개와 거실(혹은 주방 일체형)로 구성되어 있습니다. 좁은 공간을 넓어 보이게 하는 것은 인테리어의 핵심 과제입니다. 좁은 공간 인테리어의 핵심은 시각적 개방감과 수납 솔루션에 있습니다.</p>
+
+    <h3>1. 시각적 확장 효과 (컬러와 조명)</h3>
+    <p>벽지와 가구는 밝은 색상을 선택하고, 창문은 커튼 대신 블라인드나 쉬폰 커튼을 활용하여 빛이 잘 들어오게 합니다. 조명은 천장 중앙등보다는 간접 조명, 레일 조명, 스탠드 조명 등을 사용하여 공간에 깊이감을 더하는 것이 효과적입니다.</p>
+
+    <h3>2. 가구 배치 전략 (배치와 수납)</h3>
+    <p>투룸의 경우 거실 공간이 좁아 소파 배치가 어렵습니다. 벽에 붙여 배치하는 것이 일반적이며, 수납이 가능한 낮은 TV장이나 수납형 테이블을 활용하면 좋습니다. 침실은 수납형 침대나 붙박이장을 활용하여 바닥 공간을 확보합니다. 특히, <strong>좁은 투룸</strong>에 적합한 가구 배치는 복잡한 동선을 줄이고 여유 공간을 확보하는 데 중점을 두어야 합니다.</p>
+
+    <h3>3. 주방과 욕실 리모델링</h3>
+    <p>주방은 'ㄱ'자형이나 'ㄷ'자형 대신 'ㅡ'자형 싱크대를 배치하여 공간을 절약하거나, 아일랜드 식탁을 활용하여 조리대와 식탁을 겸하는 것이 좋습니다. 욕실은 젠다이(선반) 설치를 통해 수납공간을 확보하고, 밝은 타일을 선택하여 좁은 공간을 시각적으로 넓어 보이게 합니다.</p>
+
+    <div class="image-container">
+      <img src="https://도메인/투룸_인테리어_가이드_예시.jpg" alt="투룸 인테리어 시공 전후 비교 사진" />
+    </div>
+  </section>
+
+  <section id="region-guide">
+    <span id="region-guide-anchor" class="anchor"></span>
+    <h2>전국 지역별 투룸 인테리어 비용 차이: 서울 vs. 지방</h2>
+    <p><strong>투룸 인테리어 견적</strong>은 지역별로 큰 차이를 보입니다. 특히 수도권과 지방의 인건비 및 자재 운반비 차이로 인해 <strong>서울 투룸 인테리어</strong>는 상대적으로 <strong>높은 금액</strong>을 형성하며, <strong>부산 투룸 인테리어</strong>, <strong>대구 투룸 인테리어</strong> 등 광역시 또한 수요가 높아 평균 금액대가 높습니다.</p>
+
+    <h3>주요 지역별 인테리어 키워드 분석 (키워드 30개 이상 포함)</h3>
+    <p>각 지역의 특성에 따라 선호하는 디자인이나 시공 유형도 다릅니다. 예를 들어, <strong>서울 강남 투룸 인테리어</strong>는 고급 자재를 선호하는 경향이 있으며, <strong>서울 홍대 투룸 인테리어</strong>는 개성 강한 디자인이 많습니다. <strong>경기 수원 투룸 인테리어</strong>와 <strong>용인 투룸 인테리어</strong>는 신축 아파트와 구축 빌라의 시공 비중이 비슷하며, <strong>경기 분당 투룸 인테리어</strong>는 트렌디한 디자인을 선호합니다.</p>
+    <p><strong>지방 광역시</strong>의 경우, <strong>부산 투룸 인테리어</strong>나 <strong>울산 투룸 인테리어</strong>는 해안가 특성상 습기에 강한 자재 선택이 중요합니다. <strong>대구 투룸 인테리어</strong>와 <strong>대전 투룸 인테리어</strong>는 젊은 층의 유입이 활발하여 가성비 좋은 시공을 많이 찾습니다. <strong>광주 투룸 인테리어</strong>와 <strong>청주 투룸 인테리어</strong>는 주거 환경 개선을 위한 리모델링 수요가 높습니다. <strong>세종시 투룸 인테리어</strong>는 신축 아파트 위주로 입주 후 부분 인테리어 수요가 많습니다.</p>
+    <p>이 외에도 <strong>인천 송도 투룸 인테리어</strong>, <strong>천안 투룸 인테리어</strong>, <strong>평택 투룸 인테리어</strong>, <strong>안산 투룸 인테리어</strong>, <strong>일산 투룸 인테리어</strong>, <strong>의정부 투룸 인테리어</strong>, <strong>고양 투룸 인테리어</strong>, <strong>제주 투룸 인테리어</strong>, <strong>김해 투룸 인테리어</strong>, <strong>양산 투룸 인테리어</strong>, <strong>창원 투룸 인테리어</strong>, <strong>포항 투룸 인테리어</strong>, <strong>경주 투룸 인테리어</strong>, <strong>전주 투룸 인테리어</strong>, <strong>순천 투룸 인테리어</strong> 등 전국적으로 <strong>투룸 인테리어 견적 비교</strong>에 대한 관심이 높습니다.</p>
+    <p><strong>저렴한 곳</strong>을 찾으려면 <strong>반포장이사</strong>와 같이 부분 인테리어를 고려하거나, <strong>내돈내산 후기</strong>를 참고하여 <strong>가성비 좋은 업체</strong>를 선택해야 합니다. <strong>가입</strong> 시 제공되는 혜택이나 <strong>순위</strong> 비교 사이트를 활용하는 것도 좋은 방법입니다. <strong>투룸 인테리어 장점</strong>은 큰 평수에 비해 <strong>비용</strong> 부담이 적고 시공 기간이 짧다는 점입니다.</p>
+    <p><strong><a href="https://www.law.go.kr/lsInfoP.do?lsiSeq=252554&efYd=20230718#0000">주택법 등 인테리어 관련 법규 확인하기</a></strong></p>
+  </section>
+
+  <section id="review-guide">
+    <span id="review-guide-anchor" class="anchor"></span>
+    <h2>투룸 인테리어 업체 추천 및 내돈내산 후기 분석</h2>
+    <p>만족스러운 인테리어를 위해서는 믿을 수 있는 업체를 찾는 것이 중요합니다. <strong>내돈내산 후기</strong>를 꼼꼼히 살피고, 여러 업체에 견적을 의뢰하여 <strong>비용</strong>을 <strong>비교</strong>하는 과정을 거쳐야 합니다. <strong>추천</strong> 업체는 단순히 <strong>싼곳</strong>이 아니라 시공 능력과 A/S가 확실한 곳이어야 합니다.</p>
+
+    <h3>1. 업체 선정 시 고려사항</h3>
+    <ul>
+      <li><strong>견적 투명성:</strong> 상세 견적서를 제공하는지 확인합니다. 자재비, 인건비, 부가세 등을 명확히 구분해야 합니다.</li>
+      <li><strong>A/S 보장:</strong> 인테리어 완료 후 하자 발생 시 A/S 기간과 범위를 계약서에 명시해야 합니다.</li>
+      <li><strong>포트폴리오:</strong> 투룸 시공 경험이 많은지 확인하고, 실제 시공 사진을 참고하여 원하는 스타일과 일치하는지 확인합니다.</li>
+      <li><strong>소통 능력:</strong> 인테리어는 소통이 중요합니다. 미팅을 통해 디자이너와 충분히 소통이 가능한지 판단해야 합니다.</li>
+    </ul>
+
+    <h3>2. 추천 인테리어 스타일 (키워드: 모던, 북유럽, 미니멀)</h3>
+    <p><strong>모던 스타일:</strong> 깔끔하고 세련된 느낌을 선호하는 분들에게 <strong>추천</strong>합니다. 무채색 계열을 주로 사용하며, 간결한 가구 배치가 특징입니다. <strong>북유럽 스타일:</strong> 따뜻하고 아늑한 느낌을 줍니다. 원목 가구와 부드러운 톤의 패브릭을 활용하여 <strong>장점</strong>이 극대화됩니다. <strong>미니멀 스타일:</strong> 최소한의 가구로 최대의 공간감을 확보합니다. 좁은 투룸에 <strong>가장 적합한</strong> 스타일로 <strong>단점</strong>은 수납 부족을 느낄 수 있으므로 수납 계획이 중요합니다.</p>
+    <p><strong><a href="https://www.interior.or.kr/main/index.php">한국인테리어디자인협회 공식 홈페이지</a></strong></p>
+  </section>
+
+  <section id="checklist">
+    <span id="checklist-anchor" class="anchor"></span>
+    <h2>투룸 인테리어 시작 전 필수 체크리스트 (2026년 업데이트)</h2>
+    <p>성공적인 인테리어를 위해서는 시공 전 꼼꼼한 준비가 필요합니다. 특히 투룸은 공간이 좁아 사전에 철저한 계획을 세우지 않으면 공사 중 문제가 발생하기 쉽습니다.</p>
+    <ol>
+      <li><strong>예산 확정:</strong> 전체 <strong>투룸 인테리어 비용</strong> 예산을 설정하고, 자재 등급을 결정합니다. 예상치 못한 추가 비용을 위해 10~20%의 여유 예산을 확보합니다.</li>
+      <li><strong>컨셉 설정:</strong> 원하는 디자인 스타일(모던, 미니멀, 북유럽 등)을 명확히 정하고, 레퍼런스 이미지(사진)를 수집합니다.</li>
+      <li><strong>업체 선정 및 계약:</strong> 최소 3곳 이상의 업체에서 <strong>견적 비교</strong>를 진행하고, 시공 범위와 A/S 기간을 명시한 계약서를 작성합니다.</li>
+      <li><strong>시공 일정 조율:</strong> 아파트나 빌라의 경우, 인테리어 공사 시 소음 발생에 대한 이웃 동의를 미리 받습니다.</li>
+      <li><strong>가구 및 가전 배치 계획:</strong> 가구 배치도를 미리 그려보고, 가전제품 크기를 고려하여 전기 콘센트 위치를 정합니다.</li>
+      <li><strong>이사 및 짐 정리:</strong> 인테리어 시작 전 짐을 미리 정리하고, <strong>반포장이사</strong> 또는 <strong>포장이사</strong>를 통해 이삿짐을 운반할 계획을 세웁니다.</li>
+    </ol>
+  </section>
+
+  <section id="faq">
+    <span id="faq-anchor" class="anchor"></span>
+    <h2>자주 묻는 질문 (FAQ)</h2>
+    <h3>Q1: 투룸 인테리어에서 가장 <strong>저렴한 곳</strong>을 찾는 방법은 무엇인가요?</h3>
+    <p>A: <strong>저렴한 곳</strong>을 찾으려면 시공 범위 축소(부분 인테리어)와 DIY 비중을 높여야 합니다. 또한, 여러 업체에 <strong>견적</strong>을 받아 <strong>비용</strong>을 <strong>비교</strong>하고, <strong>가입</strong> 시 제공되는 할인 혜택 등을 활용할 수 있습니다. <strong>싼곳</strong>을 찾는 것보다 시공 품질 대비 가성비가 좋은 곳을 선택하는 것이 장기적으로 유리합니다.</p>
+    <h3>Q2: 투룸 인테리어에서 <strong>내돈내산</strong> 후기를 참고할 때 유의할 점은 무엇인가요?</h3>
+    <p>A: <strong>내돈내산 후기</strong>를 참고할 때는 해당 후기의 시공 범위, 사용된 자재, 그리고 계약 당시의 <strong>비용</strong>을 꼼꼼히 확인해야 합니다. 후기만 보고 무조건 <strong>추천</strong> 업체를 선택하기보다는, 자신의 예산과 요구사항에 맞춰 시공 가능 여부를 확인하는 것이 중요합니다.</p>
+  </section>
+
+  <section id="contact">
+    <span id="contact-anchor" class="anchor"></span>
+    <h2>투룸 인테리어 실시간 견적 상담 문의</h2>
+    <p>전문가의 맞춤 상담을 통해 좁은 투룸 공간도 넓고 효율적으로 바꿔보세요. 아래 양식을 작성해 주시면 담당자가 연락드립니다.</p>
+    <form action="/submit" method="POST" style="max-width:600px; margin:auto;">
+      <label for="name">이름<span style="color:red;">*</span></label><br />
+      <input type="text" id="name" name="name" required placeholder="예: 홍길동" />
+
+      <label for="phone">연락처<span style="color:red;">*</span></label><br />
+      <input type="tel" id="phone" name="phone" required placeholder="010-1234-5678" pattern="[0-9\-]+" />
+
+      <label for="area">이사/시공 지역<span style="color:red;">*</span></label><br />
+      <input type="text" id="area" name="area" required placeholder="예: 서울시 강남구, 경기도 수원시" />
+
+      <label for="move-type">인테리어 시공 유형<span style="color:red;">*</span></label><br />
+      <select id="move-type" name="move_type" required>
+        <option value="">선택하세요</option>
+        <option value="전체 리모델링">전체 리모델링 (주방, 욕실 포함)</option>
+        <option value="부분 시공">부분 시공 (도배, 장판, 조명)</option>
+        <option value="주방/욕실만">주방/욕실만</option>
+        <option value="상담 후 결정">상담 후 결정</option>
+      </select>
+
+      <label for="budget">예상 예산 범위<span style="color:red;">*</span></label><br />
+      <select id="budget" name="budget" required>
+        <option value="">선택하세요</option>
+        <option value="100-300만원">100만원 ~ 300만원 미만</option>
+        <option value="300-500만원">300만원 ~ 500만원 미만</option>
+        <option value="500-1000만원">500만원 ~ 1,000만원 미만</option>
+        <option value="1000만원 이상">1,000만원 이상</option>
+      </select>
+
+      <label for="message">추가 요청 사항 및 특이사항</label><br />
+      <textarea id="message" name="message" rows="4" placeholder="예: 원하는 시공 날짜, 참고 이미지 첨부 가능"></textarea>
+
+      <label><input type="checkbox" name="privacy" required> 개인정보 수집 및 이용 동의 (필수)</label><br />
+      <button type="submit" class="btn-cta">견적 문의 보내기</button>
+    </form>
+  </section>
+
+
+  
